@@ -29,9 +29,12 @@ ui <- fluidPage(
             
         ),
         mainPanel(
-            plotOutput("peso_comprimento")
-        )
+            fluidRow(
+                column(8, plotOutput("peso_comprimento")),
+                column(4, plotOutput("box_plot_comp"))
+                    )
+                )
         
-    )
+            )
 )
 
