@@ -8,26 +8,30 @@
 #
 
 library(shiny)
+library(ggplot2)
 
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
+source("./dados.R")
 
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
 
-    # Sidebar with a slider input for number of bins
+ui <- fluidPage(
+    
+    includeCSS("./estilo.css"),
+    
+    titlePanel(h1("Peixes Marcados")),
+    
     sidebarLayout(
         sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+            helpText("Selecione a espécie desejada"),
+            
+            selectInput(inputId = "local_Selector", label = "Selecione o local", choices =  c("Todos", locais$nome_local)),
+            
+            checkboxGroupInput(inputId = "sp_CheckBox", label = "Selecione as espécies", choices = especies$id_especie, selected = "1")
+            
         ),
-
-        # Show a plot of the generated distribution
         mainPanel(
-            plotOutput("distPlot")
+            plotOutput("peso_comprimento")
         )
+        
     )
-))
+)
+
