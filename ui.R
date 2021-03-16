@@ -9,6 +9,7 @@
 
 library(shiny)
 library(ggplot2)
+library(ggthemes)
 
 source("./dados.R")
 
@@ -29,6 +30,12 @@ ui <- fluidPage(
             
         ),
         mainPanel(
+            fluidRow(
+                column(3, plotOutput("total")),
+                column(3, plotOutput("media_com")),
+                column(3, plotOutput("media_peso")),
+                column(3, plotOutput("total_2"))
+            ),
             fluidRow(
                 column(8, plotOutput("peso_comprimento")),
                 column(4, plotOutput("box_plot_comp"))

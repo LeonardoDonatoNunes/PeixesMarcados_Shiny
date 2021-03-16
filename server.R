@@ -74,4 +74,26 @@ server <- function(input, output, session) {
             xlab("Comprimento (cm)") +
             ylab("Peso (Kg)")
     })
+    
+    output$total <- renderPlot({
+        
+        
+        local = input$local_Selector
+        
+        if(local == "Todos"){
+            dados  = capturas
+        }
+        
+        if(local != "Todos"){
+            dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
+        }
+        
+        especie = input$sp_CheckBox
+        dados  = dados[dados$id_especie %in% especie,]
+        
+        
+        ggplot(data = dados, aes(1,1)) +
+            geom_text(aes(label = nrow(dados))) +
+            theme_map()
+    })
 }
