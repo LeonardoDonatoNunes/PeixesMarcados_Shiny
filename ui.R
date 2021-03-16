@@ -31,10 +31,10 @@ ui <- fluidPage(
         ),
         mainPanel(
             fluidRow(
-                column(3, plotOutput("total")),
-                column(3, plotOutput("media_com")),
-                column(3, plotOutput("media_peso")),
-                column(3, plotOutput("total_2"))
+                column(3, plotOutput("total", height = "100px")),
+                column(3, plotOutput("media_com", height = "100px")),
+                column(3, plotOutput("media_peso", height = "100px")),
+                column(3, plotOutput("total_2", height = "100px"))
             ),
             fluidRow(
                 column(8, plotOutput("peso_comprimento")),
