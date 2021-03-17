@@ -13,10 +13,13 @@ server <- function(input, output, session) {
             dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
         }
         
+        especies_obs <- especies[especies$id_especie %in% unique(dados$id_especie), ]
+        
         updateCheckboxGroupInput(session, "sp_CheckBox",
                                  label = paste0("Selecione as especies do ", local),
-                                 choices = unique(dados$id_especie),
-                                 selected = unique(dados$id_especie)[1],
+                                 choiceNames = especies_obs$especies,
+                                 choiceValues = especies_obs$id_especie,
+                                 selected = especies_obs$id_especie[1],
         )
     })
     
@@ -68,21 +71,21 @@ server <- function(input, output, session) {
     output$total <- renderValueBox({
         valueBox(
             paste0(nrow(dados())), "Número de peixes marcados", icon = icon("fish"),
-            color = "purple"
+            color = "black"
         )
     })
     
     output$media_comp <- renderValueBox({
         valueBox(
             paste0(round(mean(dados()$comprimento),2)," cm"), "Média Comprimento", icon = icon("ruler-horizontal"),
-            color = "purple"
+            color = "black"
         )
     })
     
     output$media_peso <- renderValueBox({
         valueBox(
             paste0(round(mean(dados()$peso),2), " kg"), "Média Peso", icon = icon("weight-hanging"),
-            color = "purple"
+            color = "black"
         )
     })
     
