@@ -1,6 +1,6 @@
 
+
 server <- function(input, output, session) {
-    
     
     observe({
         local = input$local_Selector
@@ -20,10 +20,9 @@ server <- function(input, output, session) {
         )
     })
     
-    
-    output$peso_comprimento <- renderPlot({
+    dados <- reactive({
         
-        local = input$local_Selector
+        local <- input$local_Selector
         
         if(local == "Todos"){
             dados  = capturas
@@ -34,9 +33,13 @@ server <- function(input, output, session) {
         }
         
         especie = input$sp_CheckBox
-        dados  = dados[dados$id_especie %in% especie,]
+        dados[dados$id_especie %in% especie,]
         
-        ggplot(data = dados, aes(x = comprimento, y = peso, color = as.factor(id_especie))) +
+    })
+    
+    output$peso_comprimento <- renderPlot({
+        
+        ggplot(data = dados(), aes(x = comprimento, y = peso, color = as.factor(id_especie))) +
             geom_point() +
             geom_smooth() + 
             theme_classic(base_size = 20) +
@@ -52,21 +55,8 @@ server <- function(input, output, session) {
     })
     
     output$box_plot_comp <- renderPlot({
-        
-        local = input$local_Selector
-        
-        if(local == "Todos"){
-            dados  = capturas
-        }
-        
-        if(local != "Todos"){
-            dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
-        }
-        
-        especie = input$sp_CheckBox
-        dados  = dados[dados$id_especie %in% especie,]
-        
-        ggplot(data = dados, aes(x = as.factor(id_especie), y = comprimento)) +
+    
+        ggplot(data = dados(), aes(x = as.factor(id_especie), y = comprimento)) +
             geom_boxplot() +
             theme_classic(base_size = 20) +
             theme(plot.background=element_rect(fill = "black"),
@@ -75,99 +65,25 @@ server <- function(input, output, session) {
             ylab("Peso (Kg)")
     })
     
-    output$total <- renderPlot({
-        
-        
-        local = input$local_Selector
-        
-        if(local == "Todos"){
-            dados  = capturas
-        }
-        
-        if(local != "Todos"){
-            dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
-        }
-        
-        especie = input$sp_CheckBox
-        dados  = dados[dados$id_especie %in% especie,]
-        
-        
-        ggplot(data = dados, aes(1,1)) +
-            geom_text(aes(label = nrow(dados)), col = "white", size = 5) +
-            theme_map() +
-            theme(plot.background=element_rect(fill = "black"),
-                  panel.background = element_rect(fill = 'black'))
-    }, height = 100, width = 100)
+    output$total <- renderValueBox({
+        valueBox(
+            paste0(nrow(dados())), "Número de peixes marcados", icon = icon("fish"),
+            color = "purple"
+        )
+    })
     
-    output$media_com <- renderPlot({
-        
-        
-        local = input$local_Selector
-        
-        if(local == "Todos"){
-            dados  = capturas
-        }
-        
-        if(local != "Todos"){
-            dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
-        }
-        
-        especie = input$sp_CheckBox
-        dados  = dados[dados$id_especie %in% especie,]
-        
-        
-        ggplot(data = dados, aes(1,1)) +
-            geom_text(aes(label = round(mean(dados$comprimento)),2), col = "white", size = 5) +
-            theme_map() +
-            theme(plot.background=element_rect(fill = "black"))
-    }, height = 100, width = 100)
+    output$media_comp <- renderValueBox({
+        valueBox(
+            paste0(round(mean(dados()$comprimento),2)," cm"), "Média Comprimento", icon = icon("ruler-horizontal"),
+            color = "purple"
+        )
+    })
     
-    output$media_peso <- renderPlot({
-        
-        
-        local = input$local_Selector
-        
-        if(local == "Todos"){
-            dados  = capturas
-        }
-        
-        if(local != "Todos"){
-            dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
-        }
-        
-        especie = input$sp_CheckBox
-        dados  = dados[dados$id_especie %in% especie,]
-        
-        
-        ggplot(data = dados, aes(1,1)) +
-            geom_text(aes(label = round(mean(dados$peso)),2), col = "white", size = 5) +
-            theme_map() +
-            theme(plot.background=element_rect(fill = "black"))
-    }, height = 100, width = 100)
-    
-    output$total_2 <- renderPlot({
-        
-        
-        local = input$local_Selector
-        
-        if(local == "Todos"){
-            dados  = capturas
-        }
-        
-        if(local != "Todos"){
-            dados  = capturas[capturas$id_local %in% locais[locais$nome_local == local,]$id_local,]
-        }
-        
-        especie = input$sp_CheckBox
-        dados  = dados[dados$id_especie %in% especie,]
-        
-        
-        ggplot(data = dados, aes(1,1)) +
-            geom_text(aes(label = nrow(dados)), col = "white", size = 5) +
-            theme_map() +
-            theme(plot.background=element_rect(fill = "black"))
-    }, height = 100, width = 100)
-    
-    
+    output$media_peso <- renderValueBox({
+        valueBox(
+            paste0(round(mean(dados()$peso),2), " kg"), "Média Peso", icon = icon("weight-hanging"),
+            color = "purple"
+        )
+    })
     
 }

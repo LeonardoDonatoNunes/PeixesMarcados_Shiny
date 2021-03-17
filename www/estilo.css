@@ -1,0 +1,12 @@
+.main-header .logo {
+  font-family: "Georgia", Times, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #0a3505;
+  color: #b1a9a9;
+border-bottom: 0 solid transparent;
+}
+
+.navbar {
+    background-color: #333532;
+}

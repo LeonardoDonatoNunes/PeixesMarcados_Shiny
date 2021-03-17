@@ -10,38 +10,56 @@
 library(shiny)
 library(ggplot2)
 library(ggthemes)
+library(shinydashboard)
 
 source("./dados.R")
 
 
-ui <- fluidPage(
-    
-    includeCSS("./estilo.css"),
-    
-    titlePanel(h1("Peixes Marcados")),
-    
-    sidebarLayout(
-        sidebarPanel(
-            helpText("Selecione a espécie desejada"),
-            
-            selectInput(inputId = "local_Selector", label = "Selecione o local", choices =  c("Todos", locais$nome_local)),
-            
-            checkboxGroupInput(inputId = "sp_CheckBox", label = "Selecione as espécies", choices = especies$id_especie, selected = "1")
-            
-        ),
-        mainPanel(
-            fluidRow(
-                column(3, plotOutput("total", height = "100px")),
-                column(3, plotOutput("media_com", height = "100px")),
-                column(3, plotOutput("media_peso", height = "100px")),
-                column(3, plotOutput("total_2", height = "100px"))
-            ),
-            fluidRow(
-                column(8, plotOutput("peso_comprimento")),
-                column(4, plotOutput("box_plot_comp"))
-                    )
-                )
-        
-            )
-)
+ui <- dashboardPage(
+  
 
+    dashboardHeader(title = span(icon("fish"),"Peixes Marcados"),
+                    tags$li(a(href = '',
+                              icon("power-off"),
+                              title = "Back to Apps Home"),
+                            class = "dropdown"),
+                    tags$li(a(href = 'https://leonardodonatonunes.github.io/ds/',
+                              img(src = 'Logo_Cinza.png',
+                                  title = "Leonardo Donato Nunes - Data Science", height = "30px"),
+                              style = "padding-top:10px; padding-bottom:10px;"),
+                            class = "dropdown")),
+    
+    dashboardSidebar(
+      
+      selectInput(inputId = "local_Selector", label = "Selecione o local", choices =  c("Todos", locais$nome_local)),
+      
+      checkboxGroupInput(inputId = "sp_CheckBox", label = "Selecione as espécies", choices = especies$id_especie, selected = "1")
+      
+    ),
+    dashboardBody(
+      tags$head(
+        tags$link(rel = "stylesheet", type = "text/css", href = "estilo.css")
+      ),
+      
+      
+      fluidRow(
+        # A static valueBox
+        valueBoxOutput("total", width = 4),
+        
+        # Dynamic valueBoxes
+        valueBoxOutput("media_comp", width = 4),
+        
+        valueBoxOutput("media_peso", width = 4)
+      ),
+      
+      
+      fluidRow(
+       box(title = "Relação Peso x Comprimento", status = "warning", solidHeader = TRUE,
+                      "Box content here", br(), "More box content",
+           plotOutput("peso_comprimento"), width = 8),
+      box(title = "Boxplot dos pesos", status = "warning", solidHeader = TRUE,
+                      "Box content here", br(), "More box content",
+          plotOutput("box_plot_comp"), width = 4)
+      )
+    )
+)
