@@ -24,9 +24,15 @@ ui <- dashboardPage(
     dashboardHeader(
             titleWidth = 300,
             title = span(icon("fish"),"Projetos de marcação"),
-                    tags$li(a(href = 'https://leonardodonatonunes.github.io/ds/',
+                    
+                    tags$li(a(href = 'https://github.com/LeonardoDonatoNunes/PeixesMarcados_Shiny',
+                              icon("github"),
+                              title = "Código fonte"),
+                            class = "dropdown"),
+                    
+                    tags$li(a(href = 'https://github.com/LeonardoDonatoNunes/PeixesMarcados_Shiny',
                               img(src = 'Logo_Verde.png',
-                                  title = "Leonardo Donato Nunes - Data Science", height = "30px"),
+                                  title = "Código fonte", height = "30px"),
                               style = "padding-top:10px; padding-bottom:10px;"),
                             class = "dropdown")),
     
