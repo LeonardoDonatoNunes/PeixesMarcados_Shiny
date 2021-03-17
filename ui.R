@@ -12,6 +12,9 @@ library(ggplot2)
 library(ggthemes)
 library(shinydashboard)
 library(dashboardthemes)
+library(dplyr)
+library(leaflet)
+library(htmltools)
 
 source("./dados.R")
 source("./tema.R")
@@ -19,43 +22,94 @@ source("./tema.R")
 ui <- dashboardPage(
 
     dashboardHeader(
-            titleWidth = 250,
-            title = span(icon("fish"),"Peixes Marcados"),
+            titleWidth = 300,
+            title = span(icon("fish"),"Projetos de marcação"),
                     tags$li(a(href = 'https://leonardodonatonunes.github.io/ds/',
                               img(src = 'Logo_Verde.png',
                                   title = "Leonardo Donato Nunes - Data Science", height = "30px"),
                               style = "padding-top:10px; padding-bottom:10px;"),
                             class = "dropdown")),
     
+    
+    
+    
     dashboardSidebar(
       width = 250,
       selectInput(inputId = "local_Selector", label = "Selecione o local", choices =  c("Todos", locais$nome_local)),
       
-        checkboxGroupInput(inputId = "sp_CheckBox", label = "Selecione as espécies", choiceNames = especies$especies, choiceValues = especies$id_especie, selected = "1")
+        checkboxGroupInput(inputId = "sp_CheckBox",label = "Selecione as espécies", choiceNames = especies$especies, choiceValues = especies$id_especie, selected = "1")
       
     ),
+    
+    # $$$$$$$$$$$$$$$$ Corpo do dashboard $$$$$$$$$$$$$$$$$ ----
+    
     dashboardBody(
       
       customTheme,
       
-      fluidRow(
-        # A static valueBox
-        valueBoxOutput("total", width = 4),
-        
-        # Dynamic valueBoxes
-        valueBoxOutput("media_comp", width = 4),
-        
-        valueBoxOutput("media_peso", width = 4)
+      tags$head(
+        tags$link(rel = "stylesheet", type = "text/css", href = "estilo.css")
       ),
       
       
       fluidRow(
-       box(title = "Relação Peso x Comprimento", status = "primary", solidHeader = TRUE,
-                      "Box content here", br(), "More box content",
-           plotOutput("peso_comprimento"), width = 8),
-      box(title = "Boxplot dos pesos", status = "primary", solidHeader = TRUE,
-                      "Box content here", br(), "More box content",
-          plotOutput("box_plot_comp"), width = 4)
-      )
-    )
+        
+        tabBox(width = 12,
+          
+          # @@@@@@@@@@@@@@@@@@@@@ Painel 1 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+          
+          tabPanel(title = span(icon("calculator"), "Dados de contagens"),
+            fluidRow(
+              # A static valueBox
+              valueBoxOutput("total_tab1", width = 4),
+              
+              # Dynamic valueBoxes
+              valueBoxOutput("numero_proj", width = 4),
+              
+              valueBoxOutput("numero_esp", width = 4)
+            ),
+            
+            fluidRow(
+              column(8,
+                     box(title = span(icon("globe-americas"),"Pontos de coleta"), solidHeader = TRUE,
+                         leafletOutput("mapa",width = "100%",height = "400"), width = 12)),
+              
+              column(4,
+                     box(title = span(icon("chart-bar"),"Número de peixes"), 
+                         status = "primary", solidHeader = TRUE,
+                         plotOutput("numero_individuos"), width = 12))
+            )
+            
+          ),
+          
+          # @@@@@@@@@@@@@@@@@@@@@ Painel 2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+          
+          tabPanel(title = span(icon("chart-pie"), "Dados biométricos"),
+            
+                   fluidRow(
+                     # A static valueBox
+                     valueBoxOutput("total_tab2", width = 4),
+                     
+                     # Dynamic valueBoxes
+                     valueBoxOutput("media_comp", width = 4),
+                     
+                     valueBoxOutput("media_peso", width = 4)
+                   ),
+                          
+            fluidRow(
+              box(title = span(icon("chart-line",),"Relação Peso x Comprimento"), 
+                  status = "primary", solidHeader = TRUE,
+                  plotOutput("peso_comprimento"), width = 6),
+              box(title = span(icon("chart-line",),"Boxplot dos comprimentos"), 
+                  status = "primary", solidHeader = TRUE,
+                  plotOutput("box_plot_comp"), width = 3),
+              box(title = span(icon("chart-line",),"Boxplot dos pesos"), 
+                  status = "primary", solidHeader = TRUE,
+                  plotOutput("box_plot_pesos"), width = 3)
+            )
+          )
+        )
+
+  )
+)
 )

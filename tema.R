@@ -89,17 +89,17 @@ customTheme <- shinyDashboardThemeDIY(
   ,boxTitleSize = 16
   ,boxDefaultColor = "rgb(210,214,220)"
   ,boxPrimaryColor = "#000000"
-  ,boxInfoColor = "rgb(210,214,220)"
+  ,boxInfoColor = "#05adad"
   ,boxSuccessColor = "rgba(0,255,213,1)"
   ,boxWarningColor = "rgb(244,156,104)"
   ,boxDangerColor = "rgb(255,88,55)"
   
-  ,tabBoxTabColor = "rgb(255,255,255)"
-  ,tabBoxTabTextSize = 14
-  ,tabBoxTabTextColor = "rgb(0,0,0)"
-  ,tabBoxTabTextColorSelected = "rgb(0,0,0)"
-  ,tabBoxBackColor = "rgb(255,255,255)"
-  ,tabBoxHighlightColor = "rgba(44,222,235,1)"
+  ,tabBoxTabColor = "#252b26"
+  ,tabBoxTabTextSize = 16
+  ,tabBoxTabTextColor = "#c9c5c5"
+  ,tabBoxTabTextColorSelected = "#ffffff"
+  ,tabBoxBackColor = "#252b26"
+  ,tabBoxHighlightColor = "#c9c5c5"
   ,tabBoxBorderRadius = 5
   
   ### inputs

@@ -1,3 +1,12 @@
-.main-header .navbar {
-    background-color: #305007;
+.small-box .icon-large {
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+    font-size: 50px;
+    color: #149447ad
+}
+
+.small-box h3, .small-box p {
+    color: #949c95;
 }
