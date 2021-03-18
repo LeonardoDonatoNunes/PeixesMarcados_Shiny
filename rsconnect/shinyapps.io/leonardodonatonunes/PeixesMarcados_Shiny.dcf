@@ -5,8 +5,8 @@ account: leonardodonatonunes
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3792175
-bundleId: 4360360
+bundleId: 4360404
 url: https://leonardodonatonunes.shinyapps.io/PeixesMarcados_Shiny/
-when: 1616014220.49573
+when: 1616014825.98469
 asMultiple: FALSE
 asStatic: FALSE

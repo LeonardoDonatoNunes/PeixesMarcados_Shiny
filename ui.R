@@ -22,18 +22,23 @@ source("./tema.R")
 ui <- dashboardPage(
 
     dashboardHeader(
-            titleWidth = 300,
-            title = span(icon("fish"),"Projetos de marcação"),
-                    
+            titleWidth = 210,
+            title = "Peixes Dashboard",
+            
+            tags$li(class = "dropdown",
+                    tags$style(".main-header {max-height: 59px}"),
+                    tags$style(".main-header .logo {height: 59px;}"),
+                    tags$style(".sidebar-toggle {height: 59px; padding-top: 1px !important;}"),
+                    tags$style(".navbar {min-height:59px !important}")
+            ),         
+            
                     tags$li(a(href = 'https://github.com/LeonardoDonatoNunes/PeixesMarcados_Shiny',
-                              icon("github"),
+                              icon("github", "fa-2x"),
                               title = "Código fonte"),
                             class = "dropdown"),
-                    
-                    tags$li(a(href = 'https://github.com/LeonardoDonatoNunes/PeixesMarcados_Shiny',
-                              img(src = 'Logo_Verde.png',
-                                  title = "Código fonte", height = "30px"),
-                              style = "padding-top:10px; padding-bottom:10px;"),
+                    tags$li(a(href = 'https://www.linkedin.com/in/leonardo-donato-nunes-754aa5b8/',
+                              icon("linkedin", "fa-2x"),
+                              title = "LinkedIn Leonardo"),
                             class = "dropdown")),
     
     
@@ -41,6 +46,13 @@ ui <- dashboardPage(
     
     dashboardSidebar(
       width = 250,
+      
+      HTML(paste0(
+        "<br>",
+        "<a href='https://leonardodonatonunes.github.io/ds/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='Logo_Cinza.png' width = '130'></a>",
+        "<br>"
+      )),
+      
       selectInput(inputId = "local_Selector", label = "Selecione o local", choices =  c("Todos", locais$nome_local)),
       
         checkboxGroupInput(inputId = "sp_CheckBox",label = "Selecione as espécies", choiceNames = especies$especies, choiceValues = especies$id_especie, selected = "1")

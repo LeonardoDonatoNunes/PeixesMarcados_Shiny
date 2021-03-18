@@ -21,7 +21,7 @@ customTheme <- shinyDashboardThemeDIY(
   
   ,headerBackColor = "#242524"
   ,headerBoxShadowColor = "#aaaaaa"
-  ,headerBoxShadowSize = "2px 2px 2px"
+  ,headerBoxShadowSize = "0px 0px 0px"
   
   ### sidebar
   ,sidebarBackColor = cssGradientThreeColors(
