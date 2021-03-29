@@ -49,7 +49,7 @@ ui <- dashboardPage(
       
       HTML(paste0(
         "<br>",
-        "<a href='https://leonardodonatonunes.github.io/ds/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='Logo_Cinza.png' width = '130'></a>",
+        "<a href='http://www.neotropical.com.br/' target='_blank'><img style = 'display: block; margin-left: auto; margin-right: auto;' src='Logo_Cinza.png' width = '130'></a>",
         "<br>"
       )),
       
