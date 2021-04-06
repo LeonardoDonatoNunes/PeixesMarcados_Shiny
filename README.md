@@ -12,8 +12,11 @@ As visualizações e as entradas (inputs) foram escolhidos apenas para demostrar
 
 O funcionamento do aplicativo pode ser visto no GIF abaixo:
 
+<p align="center">
+
 <img src="www/Shiny_app.gif" alt="Neotropical Consultoria Ambiental" width = "700"> 
 
+</p>
 
 ## Pacotes
 ```r
