@@ -1,4 +1,4 @@
 # PeixesMarcados_Shiny
 Este aplicativo Shiny é um modelo para acompanhamento de marcação de peixes.
 
-![GIF](Shiny_app.gif)
+![GIF](www/Shiny_app.gif)
