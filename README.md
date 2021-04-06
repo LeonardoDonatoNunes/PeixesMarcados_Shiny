@@ -1,7 +1,8 @@
 # Peixes Dashboard
 
 A aplicação está disponível em:
-https://leonardodonatonunes.shinyapps.io/PeixesMarcados_Shiny/?_ga=2.213398167.2078792294.1617712714-1808415323.1615761016
+
+https://leonardodonatonunes.shinyapps.io/PeixesMarcados_Shiny/
 
 Esta aplicação Shiny foi desenvolvida como um modelo para acompanhar projetos de marcação de peixes.
 
