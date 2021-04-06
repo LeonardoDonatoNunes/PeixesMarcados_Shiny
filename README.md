@@ -1,6 +1,15 @@
-# PeixesMarcados_Shiny
+# Peixes Dashboard
 
-Modelo de aplicação Shiny para acompanhamento de peixes marcados em projetos de marcação. Os dados foram inventados para a criação deste app e foram feitas somente algumas visualizações para ilustrar.
+A aplicação está disponível em:
+https://leonardodonatonunes.shinyapps.io/PeixesMarcados_Shiny/?_ga=2.213398167.2078792294.1617712714-1808415323.1615761016
+
+Esta aplicação Shiny foi desenvolvida como um modelo para acompanhar projetos de marcação de peixes.
+
+Os dados usados foram invetados, a criação dos dadoss está no script **dados.R**.
+
+As visualizações e as entradas (inputs) foram escolhidos apenas para demostrar o funcionamento do aplicativo. 
+
+O funcionamento do aplicativo pode ser visto no GIF abaixo:
 
 <img src="www/Shiny_app.gif" alt="Neotropical Consultoria Ambiental" width = "700"> 
 
