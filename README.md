@@ -14,7 +14,7 @@ O funcionamento do aplicativo pode ser visto no GIF abaixo:
 
 <p align="center">
 
-<img src="www/Shiny_app.gif" alt="Neotropical Consultoria Ambiental" width = "700"> 
+<img src="www/Shiny_app.gif" alt="Aplicação Shiny" width = "700"> 
 
 </p>
 
